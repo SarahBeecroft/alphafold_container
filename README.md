@@ -22,9 +22,8 @@ Follow these instructions
 https://docs.quay.io/solution/getting-started.html
 
 
-
 Then you can pull down with Singularity or Docker anytime!
 
 See the Topaz.sh script for running the container on Topaz. 
 
-Alphafold databases available on /group/data/alphafold (pre-Setonix)
+Alphafold databases available on /group/data/alphafold (pre-Setonix) or /software/references/alphafold (Setonix)
