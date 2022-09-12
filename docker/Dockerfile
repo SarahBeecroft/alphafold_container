@@ -64,7 +64,7 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 
 # Install pip packages.
 RUN pip3 install --upgrade pip \
-    && pip3 install -r /app/alphafold/requirements.txt \
+    && pip3 install absl-py==0.13.0 biopython==1.79 chex==0.0.7 dm-haiku==0.0.4 dm-tree==0.1.6 docker==5.0.0 immutabledict==2.0.0 jax==0.2.14 ml-collections==0.1.0 numpy==1.19.5 pandas==1.3.4 protobuf==3.20.1 scipy==1.7.0 tensorflow-cpu==2.5.0 \
     && pip3 install --upgrade \
       jax==0.2.14 \
       jaxlib==0.1.69+cuda$(cut -f1,2 -d. <<< ${CUDA} | sed 's/\.//g') \
@@ -72,7 +72,7 @@ RUN pip3 install --upgrade pip \
 
 # Apply OpenMM patch.
 WORKDIR /opt/conda/lib/python3.7/site-packages
-RUN patch -p0 < /app/alphafold/docker/openmm.patch
+RUN patch -p0 < /app/alphafold/open.patch
 
 # Add SETUID bit to the ldconfig binary so that non-root users can run it.
 RUN chmod u+s /sbin/ldconfig.real
@@ -87,5 +87,5 @@ RUN echo $'#!/bin/bash\n\
 ldconfig\n\
 python /app/alphafold/run_alphafold.py "$@"' > /app/run_alphafold.sh \
   && chmod +x /app/run_alphafold.sh
-ENV PATH "/app/alphafold:/app:${PATH}"
+ENV PATH "/app:${PATH}"
 ENTRYPOINT ["/app/run_alphafold.sh"]
