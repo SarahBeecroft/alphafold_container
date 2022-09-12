@@ -18,14 +18,9 @@ sudo docker build -f docker/Dockerfile -t alphafold .
 ```
 
 ## How can I push the build to quay.io?
+Follow these instructions
+https://docs.quay.io/solution/getting-started.html
 
-```
-docker container commit alphafold alphafold:latest
-docker login quay.io
-docker ps -l #to get ID in next step
-docker commit 4a07b193b274 [this string will change] quay.io/sarahbeecroft9/alphafold # use your own quay.io address here
-docker push quay.io/sarahbeecroft9/alphafold # use your own quay.io address here
-```
 
 
 Then you can pull down with Singularity or Docker anytime!
