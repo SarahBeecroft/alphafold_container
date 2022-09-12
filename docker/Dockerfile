@@ -87,4 +87,5 @@ RUN echo $'#!/bin/bash\n\
 ldconfig\n\
 python /app/alphafold/run_alphafold.py "$@"' > /app/run_alphafold.sh \
   && chmod +x /app/run_alphafold.sh
+ENV PATH "/app/alphafold:/app:${PATH}"
 ENTRYPOINT ["/app/run_alphafold.sh"]
